@@ -48,6 +48,7 @@ public class Game1 : Game
 			}
 		}
 		tiles[0, 0].SetTile(TileMap.Tiles[TileMap.LocationMap[new Point(0, 0)]]);
+		tiles[1, 1].SetTile(TileMap.Tiles[TileMap.LocationMap[new Point(1, 1)]]);
 
 		rand = new();
 
