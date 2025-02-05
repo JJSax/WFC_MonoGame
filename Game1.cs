@@ -66,6 +66,7 @@ public class Game1 : Game
 		TileMap.New(new Point(6, 3), ["WW", "WW", "DD", "WW"]);
 		TileMap.New(new Point(7, 3), ["WD", "DW", "WW", "DD"]);
 
+		TileMap.New(new Point(0, 4), ["WD", "DD", "DD", "WD"]);
 		TileMap.New(new Point(1, 4), ["WW", "WW", "DW", "DD"]);
 		TileMap.New(new Point(2, 4), ["WW", "WW", "DW", "DD"]);
 		TileMap.New(new Point(3, 4), ["DD", "WW", "WW", "DD"]);
@@ -78,6 +79,7 @@ public class Game1 : Game
 		TileMap.New(new Point(10, 4), ["WD", "WD", "WW", "WW"]);
 		TileMap.New(new Point(11, 4), ["WW", "DD", "DW", "WW"]);
 
+		TileMap.New(new Point(0, 5), ["DW", "WD", "DD", "DD"]);
 		TileMap.New(new Point(1, 5), ["WD", "DD", "WW", "WW"]);
 		TileMap.New(new Point(2, 5), ["WD", "DD", "WW", "WW"]);
 		TileMap.New(new Point(3, 5), ["DD", "DD", "WW", "WW"]);
@@ -90,6 +92,7 @@ public class Game1 : Game
 		TileMap.New(new Point(10, 5), ["WW", "WD", "DW", "WW"]);
 		TileMap.New(new Point(11, 5), ["WW", "WW", "DD", "DW"]);
 
+		TileMap.New(new Point(0, 6), ["DD", "DW", "DW", "DD"]);
 		TileMap.New(new Point(1, 6), ["DW", "WW", "WW", "DD"]);
 		TileMap.New(new Point(2, 6), ["DW", "WW", "WW", "DD"]);
 		TileMap.New(new Point(3, 6), ["WW", "DD", "DD", "WW"]);
@@ -102,6 +105,7 @@ public class Game1 : Game
 		TileMap.New(new Point(10, 6), ["WW", "WW", "DW", "DW"]);
 		TileMap.New(new Point(11, 6), ["WD", "WW", "WW", "DD"]);
 
+		TileMap.New(new Point(0, 7), ["DD", "DD", "WD", "DW"]);
 		TileMap.New(new Point(1, 7), ["WW", "DD", "WD", "WW"]);
 		TileMap.New(new Point(2, 7), ["WW", "DD", "WD", "WW"]);
 		TileMap.New(new Point(3, 7), ["WW", "WW", "DD", "DD"]);
