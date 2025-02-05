@@ -80,8 +80,10 @@ public class Tile
 	public void Collapse(Tile[,] tiles)
 	{
 		Collapsed = true;
-		ImageQuad choice = availableTiles[rand.Next(availableTiles.Count)];
 		Debug.Write(Position);
+		if (availableTiles.Count == 0)
+			return; //! When there is no valid texture
+		ImageQuad choice = availableTiles[rand.Next(availableTiles.Count)];
 		Debug.Write(" : ");
 		Debug.WriteLine(choice.X + " " + choice.Y);
 		SetTile(choice);

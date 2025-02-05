@@ -17,7 +17,7 @@ public class Game1 : Game
 
 	private Tile[,] tiles = new Tile[size, size];
 	Random rand;
-	const double TIMER = 0.2f;
+	const double TIMER = 0.025f;
 	double Timer = TIMER;
 
 	public Game1()
@@ -31,19 +31,48 @@ public class Game1 : Game
 	{
 		// TODO: Add your initialization logic here
 
-		string connected = "a";
-		string unconnected = "b";
+		// Left to right or top to bottom, from top and moving clockwise
+		TileMap.New(new Point(0, 0), ["WD", "DD", "DD", "WD"]);
+		TileMap.New(new Point(1, 0), ["WW", "WD", "DD", "WD"]);
+		TileMap.New(new Point(2, 0), ["DW", "WW", "WW", "DW"]);
+		TileMap.New(new Point(3, 0), ["DW", "WD", "WD", "DW"]);
+		TileMap.New(new Point(4, 0), ["WW", "WW", "WW", "WW"]);
+		// TileMap.New(new Point(5, 0), ["WW", "WW", "DW", "DD"]);
 
-		TileMap.New(new Point(0, 0), [connected, connected, connected, connected]);
-		TileMap.New(new Point(1, 0), [connected, connected, unconnected, connected]);
-		TileMap.New(new Point(1, 1), [unconnected, connected, connected, connected]);
-		TileMap.New(new Point(1, 2), [connected, unconnected, connected, connected]);
-		TileMap.New(new Point(1, 3), [connected, connected, connected, unconnected]);
-		TileMap.New(new Point(0, 3), [unconnected, unconnected, unconnected, unconnected]);
-		TileMap.New(new Point(2, 0), [unconnected, unconnected, unconnected, connected]);
-		TileMap.New(new Point(2, 1), [connected, unconnected, unconnected, unconnected]);
-		TileMap.New(new Point(2, 2), [unconnected, connected, unconnected, unconnected]);
-		TileMap.New(new Point(2, 3), [unconnected, unconnected, connected, unconnected]);
+		TileMap.New(new Point(0, 1), ["DW", "WD", "DD", "DD"]);
+		TileMap.New(new Point(1, 1), ["DD", "DW", "WW", "DW"]);
+		TileMap.New(new Point(2, 1), ["WD", "DW", "WW", "WW"]);
+		TileMap.New(new Point(3, 1), ["WD", "DW", "DW", "WD"]);
+		TileMap.New(new Point(4, 1), ["DD", "DD", "DD", "DD"]);
+		// TileMap.New(new Point(5, 1), ["DW", "WW", "WW", "DD"]);
+
+		TileMap.New(new Point(0, 2), ["DD", "DW", "DW", "DD"]);
+		TileMap.New(new Point(1, 2), ["DW", "WW", "DW", "DD"]);
+		TileMap.New(new Point(2, 2), ["WW", "WD", "WD", "WW"]);
+		TileMap.New(new Point(3, 2), ["WD", "DW", "DW", "WD"]);
+		// TileMap.New(new Point(5, 2), ["WW", "DD", "WD", "WW"]);
+
+		TileMap.New(new Point(0, 3), ["DD", "DD", "WD", "DW"]);
+		TileMap.New(new Point(1, 3), ["WD", "DD", "WD", "WW"]);
+		TileMap.New(new Point(2, 3), ["WW", "WW", "DW", "WD"]);
+		TileMap.New(new Point(3, 3), ["DW", "WD", "WD", "DW"]);
+		// TileMap.New(new Point(5, 3), ["WD", "DD", "WW", "WW"]);
+
+		// TileMap.New(new Point(1, 4), ["WW", "WW", "DW", "DD"]);
+		// TileMap.New(new Point(2, 4), ["WW", "WW", "DW", "DD"]);
+		// TileMap.New(new Point(3, 4), ["WW", "WW", "DW", "DD"]);
+
+		// TileMap.New(new Point(1, 5), ["WD", "DD", "WW", "WW"]);
+		// TileMap.New(new Point(2, 5), ["WD", "DD", "WW", "WW"]);
+		// TileMap.New(new Point(3, 5), ["DD", "WW", "WW", "DD"]);
+
+		// TileMap.New(new Point(1, 6), ["DW", "WW", "WW", "DD"]);
+		// TileMap.New(new Point(2, 6), ["DW", "WW", "WW", "DD"]);
+		// TileMap.New(new Point(3, 6), ["WW", "DD", "DD", "WW"]);
+
+		// TileMap.New(new Point(1, 7), ["WW", "DD", "WD", "WW"]);
+		// TileMap.New(new Point(2, 7), ["WW", "WW", "DD", "DD"]);
+
 
 		for (int x = 0; x < size; x++)
 		{
@@ -64,7 +93,7 @@ public class Game1 : Game
 	{
 		_spriteBatch = new SpriteBatch(GraphicsDevice);
 
-		Tile.image = Content.Load<Texture2D>("tiles");
+		Tile.image = Content.Load<Texture2D>("WandD");
 		// TODO: use this.Content to load your game content here
 	}
 
