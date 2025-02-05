@@ -175,35 +175,16 @@ public class Game1 : Game
 			}
 		}
 
-		// if (InputManager.KeyPressed(Keys.A))
-		// {
-		// 	List<Tile> mins = [];
-		// 	int minEntropy = int.MaxValue;
-		// 	foreach (Tile tile in tiles)
-		// 	{
-		// 		if (tile.Collapsed) continue;
-		// 		if (tile.availableTiles.Count == minEntropy)
-		// 		{
-		// 			mins.Add(tile);
-		// 		}
-		// 		else if (tile.availableTiles.Count < minEntropy)
-		// 		{
-		// 			mins = [tile];
-		// 			minEntropy = tile.availableTiles.Count;
-		// 		}
-		// 	}
-
-		// 	if (mins.Count > 0)
-		// 	{
-		// 		Tile choice = mins[rand.Next(mins.Count)];
-		// 		choice.Collapse(tiles);
-		// 	}
-
-
-		// 	// tiles[0, 1].Reduce(tiles);
-		// 	// ImageQuad choice = opts[rand.Next(opts.Count)];
-		// 	// tiles[0, 1].quad = Tile.Quad(choice.X, choice.Y);
-		// }
+		if (InputManager.KeyPressed(Keys.A))
+		{
+			for (int x = 0; x < size; x++)
+			{
+				for (int y = 0; y < size; y++)
+				{
+					tiles[x, y] = new(new Point(x, y));
+				}
+			}
+		}
 
 		base.Update(gameTime);
 	}

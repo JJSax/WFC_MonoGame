@@ -104,9 +104,11 @@ public class Tile
 	public void Collapse(Tile[,] tiles)
 	{
 		Collapsed = true;
-		Debug.Write(Position);
+		// Debug.Write(Position);
 		if (availableTiles.Count == 0)
 		{
+
+			Debug.Write(Position);
 			ERRORED = true;
 			Debug.Write("MISSING: ");
 			LogTileConnections(tiles, Position, Game1.size);
@@ -117,8 +119,8 @@ public class Tile
 			return; //! When there is no valid texture
 		}
 		ImageQuad choice = availableTiles[rand.Next(availableTiles.Count)];
-		Debug.Write(" : ");
-		Debug.WriteLine(choice.X + " " + choice.Y);
+		// Debug.Write(" : ");
+		// Debug.WriteLine(choice.X + " " + choice.Y);
 		SetTile(choice);
 
 		if (Position.Y > 0) tiles[Position.X, Position.Y - 1].Reduce(tiles);
