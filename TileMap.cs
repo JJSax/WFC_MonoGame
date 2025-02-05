@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
 namespace Basic;
@@ -41,7 +42,10 @@ public static class TileMap
 	{
 
 		if (LocationMap.ContainsKey(imagePosition))
+		{
+			Debug.WriteLine("POSITION ALREADY MAPPED: " + imagePosition);
 			throw new InvalidOperationException("Position already mapped.");
+		}
 
 		LocationMap.Add(imagePosition, Tiles.Count);
 		Tiles.Add(new ImageQuad(imagePosition, connections));

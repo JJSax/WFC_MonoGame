@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace Basic;
 
@@ -20,6 +21,7 @@ public class Tile
 	public ImageQuad TileConnections;
 	public Point Position { get; private set; }
 	public bool Collapsed { get; private set; } = false;
+	private bool ERRORED = false;
 	public List<ImageQuad> availableTiles;
 
 	private static Random rand = new();
@@ -44,6 +46,11 @@ public class Tile
 	public void Draw(SpriteBatch spriteBatch, int x, int y)
 	{
 		Rectangle dest = new(x, y, Game1.drawSize, Game1.drawSize);
+		if (ERRORED)
+		{
+			spriteBatch.FillRectangle(dest, Color.Pink);
+			return;
+		}
 		spriteBatch.Draw(image, dest, quad, Color.White);
 	}
 
@@ -77,12 +84,38 @@ public class Tile
 		availableTiles = SideReduction(tiles, availableTiles, -1, 0, 3);
 	}
 
+
+	void LogTileConnections(Tile[,] tiles, Point Position, int size)
+	{
+		string top = (Position.Y > 0 && tiles[Position.X, Position.Y - 1].Collapsed)
+			? $"TOP<{tiles[Position.X, Position.Y - 1].TileConnections.Connections[0]}> " : "TOP<NA> ";
+
+		string right = (Position.X < size - 1 && tiles[Position.X + 1, Position.Y].Collapsed)
+			? $"RIGHT<{tiles[Position.X + 1, Position.Y].TileConnections.Connections[1]}> " : "RIGHT<NA> ";
+
+		string bottom = (Position.Y < size - 1 && tiles[Position.X, Position.Y + 1].Collapsed)
+			? $"BOTTOM<{tiles[Position.X, Position.Y + 1].TileConnections.Connections[2]}> " : "BOTTOM<NA> ";
+
+		string left = (Position.X > 0 && tiles[Position.X - 1, Position.Y].Collapsed)
+			? $"LEFT<{tiles[Position.X - 1, Position.Y].TileConnections.Connections[3]}> " : "LEFT<NA> ";
+
+		Debug.WriteLine($"{top}{right}{bottom}{left}");
+	}
 	public void Collapse(Tile[,] tiles)
 	{
 		Collapsed = true;
 		Debug.Write(Position);
 		if (availableTiles.Count == 0)
+		{
+			ERRORED = true;
+			Debug.Write("MISSING: ");
+			LogTileConnections(tiles, Position, Game1.size);
+			// if (Position.Y > 0 && tiles[Position.X, Position.Y - 1].Collapsed) Debug.Write("TOP<" + tiles[Position.X, Position.Y - 1].TileConnections.Connections[0] + "> ");
+			// if (Position.X < Game1.size - 1) tiles[Position.X + 1, Position.Y].Reduce(tiles);
+			// if (Position.Y < Game1.size - 1) tiles[Position.X, Position.Y + 1].Reduce(tiles);
+			// if (Position.X > 0) tiles[Position.X - 1, Position.Y].Reduce(tiles);
 			return; //! When there is no valid texture
+		}
 		ImageQuad choice = availableTiles[rand.Next(availableTiles.Count)];
 		Debug.Write(" : ");
 		Debug.WriteLine(choice.X + " " + choice.Y);
