@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,8 +18,11 @@ public class Tile
 
 	public Rectangle quad;
 	public ImageQuad TileConnections;
-	private Point Position { get; set; }
-	private bool Collapsed { get; set; } = false;
+	public Point Position { get; private set; }
+	public bool Collapsed { get; private set; } = false;
+	public List<ImageQuad> availableTiles;
+
+	private static Random rand = new();
 
 	/// <summary>
 	///
@@ -31,8 +35,9 @@ public class Tile
 		quad = new(x * tileSize, y * tileSize, tileSize, tileSize);
 		TileConnections = TileMap.Tiles[TileMap.LocationMap[new Point(x, y)]];
 		Position = tilePosition;
+		availableTiles = new(TileMap.Tiles);
 	}
-	public Tile(Point tilePosition) : this(5, 0, tilePosition) { }
+	public Tile(Point tilePosition) : this(0, 3, tilePosition) { }
 
 	public static Rectangle Quad(int x, int y) => new(x * tileSize, y * tileSize, tileSize, tileSize);
 
@@ -42,16 +47,17 @@ public class Tile
 		spriteBatch.Draw(image, dest, quad, Color.White);
 	}
 
-
 	private List<ImageQuad> SideReduction(Tile[,] tiles, List<ImageQuad> Tiles, int ox, int oy, int checkingSide)
 	{
 		if (Position.X + ox < 0 || Position.X + ox > Game1.size) return Tiles;
 		if (Position.Y + oy < 0 || Position.Y + oy > Game1.size) return Tiles;
+		if (Position.X + ox >= Game1.size) return Tiles;
+		if (Position.Y + oy >= Game1.size) return Tiles;
 		Tile other = tiles[Position.X + ox, Position.Y + oy];
 		if (!other.Collapsed) return Tiles;
 
 		List<ImageQuad> nTiles = [];
-		string otherConnection = other.TileConnections.Connections[checkingSide + 2 % 4];
+		string otherConnection = other.TileConnections.Connections[(checkingSide + 2) % 4];
 		foreach (ImageQuad quad in Tiles)
 		{
 			if (otherConnection == quad.Connections[checkingSide]) nTiles.Add(quad);
@@ -59,26 +65,37 @@ public class Tile
 		return nTiles;
 	}
 
-	public List<ImageQuad> GetValidOptions(Tile[,] tiles) // for current tile
+	public void Reduce(Tile[,] tiles) // for current tile
 	{
-		List<ImageQuad> Tiles = new(TileMap.Tiles);
 		//top
-		Tiles = SideReduction(tiles, Tiles, 0, -1, 0);
+		availableTiles = SideReduction(tiles, availableTiles, 0, -1, 0);
 		//right
-		Tiles = SideReduction(tiles, Tiles, 1, 0, 1);
+		availableTiles = SideReduction(tiles, availableTiles, 1, 0, 1);
 		//bottom
-		Tiles = SideReduction(tiles, Tiles, 0, 1, 2);
+		availableTiles = SideReduction(tiles, availableTiles, 0, 1, 2);
 		//left
-		Tiles = SideReduction(tiles, Tiles, -1, 0, 3);
+		availableTiles = SideReduction(tiles, availableTiles, -1, 0, 3);
+	}
 
-		return Tiles;
+	public void Collapse(Tile[,] tiles)
+	{
+		Collapsed = true;
+		ImageQuad choice = availableTiles[rand.Next(availableTiles.Count)];
+		Debug.Write(Position);
+		Debug.Write(" : ");
+		Debug.WriteLine(choice.X + " " + choice.Y);
+		SetTile(choice);
+
+		if (Position.Y > 0) tiles[Position.X, Position.Y - 1].Reduce(tiles);
+		if (Position.X < Game1.size - 1) tiles[Position.X + 1, Position.Y].Reduce(tiles);
+		if (Position.Y < Game1.size - 1) tiles[Position.X, Position.Y + 1].Reduce(tiles);
+		if (Position.X > 0) tiles[Position.X - 1, Position.Y].Reduce(tiles);
 	}
 
 	public void SetTile(ImageQuad to)
 	{
 		TileConnections = to;
 		quad = Quad(to.X, to.Y);
-		Collapsed = true;
 	}
 
 }

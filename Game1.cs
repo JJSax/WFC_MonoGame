@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,11 +12,13 @@ public class Game1 : Game
 	private GraphicsDeviceManager _graphics;
 	private SpriteBatch _spriteBatch;
 
-	public const int size = 3;
+	public const int size = 15;
 	public const int drawSize = 32;
 
 	private Tile[,] tiles = new Tile[size, size];
 	Random rand;
+	const double TIMER = 0.2f;
+	double Timer = TIMER;
 
 	public Game1()
 	{
@@ -38,7 +39,11 @@ public class Game1 : Game
 		TileMap.New(new Point(1, 1), [unconnected, connected, connected, connected]);
 		TileMap.New(new Point(1, 2), [connected, unconnected, connected, connected]);
 		TileMap.New(new Point(1, 3), [connected, connected, connected, unconnected]);
-		TileMap.New(new Point(5, 0), [unconnected, unconnected, unconnected, unconnected]);
+		TileMap.New(new Point(0, 3), [unconnected, unconnected, unconnected, unconnected]);
+		TileMap.New(new Point(2, 0), [unconnected, unconnected, unconnected, connected]);
+		TileMap.New(new Point(2, 1), [connected, unconnected, unconnected, unconnected]);
+		TileMap.New(new Point(2, 2), [unconnected, connected, unconnected, unconnected]);
+		TileMap.New(new Point(2, 3), [unconnected, unconnected, connected, unconnected]);
 
 		for (int x = 0; x < size; x++)
 		{
@@ -47,8 +52,8 @@ public class Game1 : Game
 				tiles[x, y] = new(new Point(x, y));
 			}
 		}
-		tiles[0, 0].SetTile(TileMap.Tiles[TileMap.LocationMap[new Point(0, 0)]]);
-		tiles[1, 1].SetTile(TileMap.Tiles[TileMap.LocationMap[new Point(1, 1)]]);
+		// tiles[0, 0].SetTile(TileMap.Tiles[TileMap.LocationMap[new Point(0, 0)]]);
+		// tiles[1, 1].SetTile(TileMap.Tiles[TileMap.LocationMap[new Point(1, 1)]]);
 
 		rand = new();
 
@@ -71,12 +76,62 @@ public class Game1 : Game
 		InputManager.Update();
 		// TODO: Add your update logic here
 
-		if (InputManager.KeyPressed(Keys.A))
+		Timer -= gameTime.ElapsedGameTime.TotalSeconds;
+		if (Timer <= 0)
 		{
-			List<ImageQuad> opts = tiles[0, 1].GetValidOptions(tiles);
-			ImageQuad choice = opts[rand.Next(opts.Count)];
-			tiles[0, 1].quad = Tile.Quad(choice.X, choice.Y);
+			Timer = TIMER;
+			List<Tile> mins = [];
+			int minEntropy = int.MaxValue;
+			foreach (Tile tile in tiles)
+			{
+				if (tile.Collapsed) continue;
+				if (tile.availableTiles.Count == minEntropy)
+				{
+					mins.Add(tile);
+				}
+				else if (tile.availableTiles.Count < minEntropy)
+				{
+					mins = [tile];
+					minEntropy = tile.availableTiles.Count;
+				}
+			}
+
+			if (mins.Count > 0)
+			{
+				Tile choice = mins[rand.Next(mins.Count)];
+				choice.Collapse(tiles);
+			}
 		}
+
+		// if (InputManager.KeyPressed(Keys.A))
+		// {
+		// 	List<Tile> mins = [];
+		// 	int minEntropy = int.MaxValue;
+		// 	foreach (Tile tile in tiles)
+		// 	{
+		// 		if (tile.Collapsed) continue;
+		// 		if (tile.availableTiles.Count == minEntropy)
+		// 		{
+		// 			mins.Add(tile);
+		// 		}
+		// 		else if (tile.availableTiles.Count < minEntropy)
+		// 		{
+		// 			mins = [tile];
+		// 			minEntropy = tile.availableTiles.Count;
+		// 		}
+		// 	}
+
+		// 	if (mins.Count > 0)
+		// 	{
+		// 		Tile choice = mins[rand.Next(mins.Count)];
+		// 		choice.Collapse(tiles);
+		// 	}
+
+
+		// 	// tiles[0, 1].Reduce(tiles);
+		// 	// ImageQuad choice = opts[rand.Next(opts.Count)];
+		// 	// tiles[0, 1].quad = Tile.Quad(choice.X, choice.Y);
+		// }
 
 		base.Update(gameTime);
 	}
@@ -87,13 +142,14 @@ public class Game1 : Game
 
 		_spriteBatch.Begin();
 		// TODO: Add your drawing code here
-		_spriteBatch.FillRectangle(0, 0, size * drawSize, size * drawSize, Color.White);
+		// _spriteBatch.FillRectangle(0, 0, size * drawSize, size * drawSize, Color.White);
 		for (int x = 0; x < size; x++)
 		{
 			for (int y = 0; y < size; y++)
 			{
 				_spriteBatch.DrawRectangle(new(x * drawSize, y * drawSize, drawSize, drawSize), Color.Black, 1);
-				tiles[x, y].Draw(_spriteBatch, x * drawSize, y * drawSize);
+				if (tiles[x, y].Collapsed)
+					tiles[x, y].Draw(_spriteBatch, x * drawSize, y * drawSize);
 			}
 		}
 

@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Basic;
 
@@ -50,11 +48,6 @@ public static class TileMap
 		return Tiles.Count;
 
 	}
-
-	// public static void Draw(SpriteBatch sb, int index, int x, int y)
-	// {
-	// 	sb.Draw()
-	// }
 
 
 }

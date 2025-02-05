@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/tiles.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/tiles.xnb","TextureProcessor","Texture2DContent",1077,360085,0.1754732
+"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/tiles.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/tiles.xnb","TextureProcessor","Texture2DContent",5121,360085,0.1618204
