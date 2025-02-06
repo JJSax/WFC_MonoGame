@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/WandD.png</SourceFile>
-  <SourceTime>2025-02-04T23:22:53.6296281-07:00</SourceTime>
+  <SourceTime>2025-02-05T00:31:43.0502709-07:00</SourceTime>
   <DestFile>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/Content/WandD.xnb</DestFile>
-  <DestTime>2025-02-04T23:23:54.7825551-07:00</DestTime>
+  <DestTime>2025-02-05T00:32:00.2753404-07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T11:05:56-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
