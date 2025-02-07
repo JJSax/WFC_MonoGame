@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -31,7 +32,7 @@ public class Tile
 	/// <param name="tilePosition">Where the tile is</param>
 	public Tile(int x, int y, Point tilePosition)
 	{
-		iQuad = TileMap.Tiles[TileMap.LocationMap[new Point(x, y)]];
+		// iQuad = TileMap.Tiles[TileMap.LocationMap[new Point(x, y)]];
 		Position = tilePosition;
 		availableTiles = new(TileMap.Tiles);
 	}
@@ -45,7 +46,7 @@ public class Tile
 			spriteBatch.FillRectangle(dest, Color.Pink);
 			return;
 		}
-		spriteBatch.Draw(image, dest, iQuad.Quad, Color.White);
+		spriteBatch.Draw(image, dest, iQuad.Quad, Color.White, iQuad.Rotation, new Vector2(8, 8), iQuad.Flip, 0f);
 	}
 
 	private List<ImageQuad> SideReduction(Tile[,] tiles, List<ImageQuad> Tiles, int ox, int oy, int checkingSide)
@@ -59,9 +60,12 @@ public class Tile
 
 		List<ImageQuad> nTiles = [];
 		string otherConnection = other.iQuad.Connections[(checkingSide + 2) % 4];
+		char[] charArray = otherConnection.ToCharArray();
+		Array.Reverse(charArray);
+		string reversed = new(charArray);
 		foreach (ImageQuad quad in Tiles)
 		{
-			if (otherConnection == quad.Connections[checkingSide]) nTiles.Add(quad);
+			if (reversed == quad.Connections[checkingSide]) nTiles.Add(quad);
 		}
 		return nTiles;
 	}

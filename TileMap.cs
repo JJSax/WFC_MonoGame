@@ -10,8 +10,8 @@ namespace Basic;
 public readonly struct ImageQuad
 {
 	private const int imageQuadSize = 15;
-	private readonly SpriteEffects flip;
-	private readonly float rotation;
+	public readonly SpriteEffects Flip { get; }
+	public readonly float Rotation { get; }
 	public int X { get; }
 	public int Y { get; }
 	public string[] Connections { get; }
@@ -22,20 +22,26 @@ public readonly struct ImageQuad
 		X = imgPosition.X;
 		Y = imgPosition.Y;
 
-		flip = flipEffect;
+		Flip = flipEffect;
 
 		if (rotationBy90 > 3) throw new ArgumentException("Attempt to rotate beyond limits");
 
-		rotation = rotationBy90 * (float)Math.PI / 2;
+		Rotation = rotationBy90 * (float)Math.PI / 2;
+		string[] newConnections = new string[4];
+		int currentConnectionsIndex = 0;
+		for (int i = 4 - rotationBy90; i < 4; i++)
+		{
+			newConnections[currentConnectionsIndex] = originalConnections[i];
+			currentConnectionsIndex++;
+		}
+		for (int i = 0; i < 4 - rotationBy90; i++)
+		{
+			newConnections[currentConnectionsIndex] = originalConnections[i];
+			currentConnectionsIndex++;
+		}
 
-		Connections = originalConnections;
+		Connections = newConnections;
 		Quad = new Rectangle(X * imageQuadSize, Y * imageQuadSize, imageQuadSize, imageQuadSize);
-	}
-
-	public void Draw(SpriteBatch _spriteBatch, Rectangle dest)
-	{
-		_spriteBatch.Draw(Tile.image, dest, Quad, Color.White, rotation, Vector2.Zero, flip, 0f);
-		// _spriteBatch.Draw(Tile.image, new Rectangle(0, 0, 30, 30), new Rectangle(0, 0, 15, 15), Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0f);
 	}
 }
 
@@ -48,7 +54,7 @@ public readonly struct ImageQuad
 public static class TileMap
 {
 	public static List<ImageQuad> Tiles { get; private set; } = [];
-	public static Dictionary<Point, int> LocationMap { get; private set; } = [];
+	// public static Dictionary<Point, int> LocationMap { get; private set; } = [];
 
 	/// <summary>
 	///
@@ -57,19 +63,20 @@ public static class TileMap
 	/// <param name="ty"></param>
 	/// <param name="connections">Top - Right - Bottom - Left</param>
 	/// <returns></returns>
-	public static int New(Point imagePosition, string[] connections, SpriteEffects flip = SpriteEffects.None, sbyte rotationBy90 = 0)
+	public static void New(Point imagePosition, string[] connections)
 	{
 
-		if (LocationMap.ContainsKey(imagePosition))
-		{
-			Debug.WriteLine("POSITION ALREADY MAPPED: " + imagePosition);
-			throw new InvalidOperationException("Position already mapped.");
-		}
+		// if (LocationMap.ContainsKey(imagePosition))
+		// {
+		// 	Debug.WriteLine("POSITION ALREADY MAPPED: " + imagePosition);
+		// 	throw new InvalidOperationException("Position already mapped.");
+		// }
 
-		LocationMap.Add(imagePosition, Tiles.Count);
-		Tiles.Add(new ImageQuad(imagePosition, connections, flip, rotationBy90));
-		return Tiles.Count;
-
+		// LocationMap.Add(imagePosition, Tiles.Count);
+		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 0));
+		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1));
+		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 2));
+		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 3));
 	}
 
 
