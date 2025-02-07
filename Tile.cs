@@ -14,11 +14,8 @@ public class Tile
 {
 
 	public static Texture2D image;
-	private const short tileSize = 15;
 
-
-	public Rectangle quad;
-	public ImageQuad TileConnections;
+	public ImageQuad iQuad;
 	public Point Position { get; private set; }
 	public bool Collapsed { get; private set; } = false;
 	private bool ERRORED = false;
@@ -34,14 +31,11 @@ public class Tile
 	/// <param name="tilePosition">Where the tile is</param>
 	public Tile(int x, int y, Point tilePosition)
 	{
-		quad = new(x * tileSize, y * tileSize, tileSize, tileSize);
-		TileConnections = TileMap.Tiles[TileMap.LocationMap[new Point(x, y)]];
+		iQuad = TileMap.Tiles[TileMap.LocationMap[new Point(x, y)]];
 		Position = tilePosition;
 		availableTiles = new(TileMap.Tiles);
 	}
 	public Tile(Point tilePosition) : this(0, 3, tilePosition) { }
-
-	public static Rectangle Quad(int x, int y) => new(x * tileSize, y * tileSize, tileSize, tileSize);
 
 	public void Draw(SpriteBatch spriteBatch, int x, int y)
 	{
@@ -51,7 +45,7 @@ public class Tile
 			spriteBatch.FillRectangle(dest, Color.Pink);
 			return;
 		}
-		spriteBatch.Draw(image, dest, quad, Color.White);
+		spriteBatch.Draw(image, dest, iQuad.Quad, Color.White);
 	}
 
 	private List<ImageQuad> SideReduction(Tile[,] tiles, List<ImageQuad> Tiles, int ox, int oy, int checkingSide)
@@ -64,7 +58,7 @@ public class Tile
 		if (!other.Collapsed) return Tiles;
 
 		List<ImageQuad> nTiles = [];
-		string otherConnection = other.TileConnections.Connections[(checkingSide + 2) % 4];
+		string otherConnection = other.iQuad.Connections[(checkingSide + 2) % 4];
 		foreach (ImageQuad quad in Tiles)
 		{
 			if (otherConnection == quad.Connections[checkingSide]) nTiles.Add(quad);
@@ -88,16 +82,16 @@ public class Tile
 	void LogTileConnections(Tile[,] tiles, Point Position, int size)
 	{
 		string top = (Position.Y > 0 && tiles[Position.X, Position.Y - 1].Collapsed)
-			? $"TOP<{tiles[Position.X, Position.Y - 1].TileConnections.Connections[0]}> " : "TOP<NA> ";
+			? $"TOP<{tiles[Position.X, Position.Y - 1].iQuad.Connections[0]}> " : "TOP<NA> ";
 
 		string right = (Position.X < size - 1 && tiles[Position.X + 1, Position.Y].Collapsed)
-			? $"RIGHT<{tiles[Position.X + 1, Position.Y].TileConnections.Connections[1]}> " : "RIGHT<NA> ";
+			? $"RIGHT<{tiles[Position.X + 1, Position.Y].iQuad.Connections[1]}> " : "RIGHT<NA> ";
 
 		string bottom = (Position.Y < size - 1 && tiles[Position.X, Position.Y + 1].Collapsed)
-			? $"BOTTOM<{tiles[Position.X, Position.Y + 1].TileConnections.Connections[2]}> " : "BOTTOM<NA> ";
+			? $"BOTTOM<{tiles[Position.X, Position.Y + 1].iQuad.Connections[2]}> " : "BOTTOM<NA> ";
 
 		string left = (Position.X > 0 && tiles[Position.X - 1, Position.Y].Collapsed)
-			? $"LEFT<{tiles[Position.X - 1, Position.Y].TileConnections.Connections[3]}> " : "LEFT<NA> ";
+			? $"LEFT<{tiles[Position.X - 1, Position.Y].iQuad.Connections[3]}> " : "LEFT<NA> ";
 
 		Debug.WriteLine($"{top}{right}{bottom}{left}");
 	}
@@ -112,15 +106,9 @@ public class Tile
 			ERRORED = true;
 			Debug.Write("MISSING: ");
 			LogTileConnections(tiles, Position, Game1.size);
-			// if (Position.Y > 0 && tiles[Position.X, Position.Y - 1].Collapsed) Debug.Write("TOP<" + tiles[Position.X, Position.Y - 1].TileConnections.Connections[0] + "> ");
-			// if (Position.X < Game1.size - 1) tiles[Position.X + 1, Position.Y].Reduce(tiles);
-			// if (Position.Y < Game1.size - 1) tiles[Position.X, Position.Y + 1].Reduce(tiles);
-			// if (Position.X > 0) tiles[Position.X - 1, Position.Y].Reduce(tiles);
 			return; //! When there is no valid texture
 		}
 		ImageQuad choice = availableTiles[rand.Next(availableTiles.Count)];
-		// Debug.Write(" : ");
-		// Debug.WriteLine(choice.X + " " + choice.Y);
 		SetTile(choice);
 
 		if (Position.Y > 0) tiles[Position.X, Position.Y - 1].Reduce(tiles);
@@ -129,10 +117,6 @@ public class Tile
 		if (Position.X > 0) tiles[Position.X - 1, Position.Y].Reduce(tiles);
 	}
 
-	public void SetTile(ImageQuad to)
-	{
-		TileConnections = to;
-		quad = Quad(to.X, to.Y);
-	}
+	public void SetTile(ImageQuad to) => iQuad = to;
 
 }

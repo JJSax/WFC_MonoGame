@@ -12,7 +12,7 @@ public class Game1 : Game
 	private GraphicsDeviceManager _graphics;
 	private SpriteBatch _spriteBatch;
 
-	public const int size = 15;
+	public const int size = 15; // how many tiles wide/high
 	public const int drawSize = 32;
 
 	private Tile[,] tiles = new Tile[size, size];
@@ -253,7 +253,6 @@ public class Game1 : Game
 
 		_spriteBatch.Begin();
 		// TODO: Add your drawing code here
-		// _spriteBatch.FillRectangle(0, 0, size * drawSize, size * drawSize, Color.White);
 		for (int x = 0; x < size; x++)
 		{
 			for (int y = 0; y < size; y++)
