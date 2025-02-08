@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,6 +12,8 @@ public class Game1 : Game
 {
 	private GraphicsDeviceManager _graphics;
 	private SpriteBatch _spriteBatch;
+
+	private SpriteFont font;
 
 	public const int size = 15; // how many tiles wide/high
 	public const int drawSize = 32;
@@ -71,6 +74,7 @@ public class Game1 : Game
 		_spriteBatch = new SpriteBatch(GraphicsDevice);
 
 		Tile.image = Content.Load<Texture2D>("Sys2");
+		font = Content.Load<SpriteFont>("Arial");
 		// TODO: use this.Content to load your game content here
 	}
 
@@ -133,9 +137,26 @@ public class Game1 : Game
 		{
 			for (int y = 0; y < size; y++)
 			{
-				_spriteBatch.DrawRectangle(new(x * drawSize, y * drawSize, drawSize, drawSize), Color.Black, 1);
-				if (tiles[x, y].Collapsed)
-					tiles[x, y].Draw(_spriteBatch, x * drawSize, y * drawSize);
+				Tile tile = tiles[x, y];
+				if (tile.Collapsed)
+					tile.Draw(_spriteBatch, x * drawSize, y * drawSize);
+				Rectangle dest = new(x * drawSize, y * drawSize, drawSize, drawSize);
+				_spriteBatch.DrawRectangle(dest, Color.Black, 1);
+				if (tile.Collapsed && dest.Contains(InputManager.MousePosition))
+				{
+					_spriteBatch.DrawString(
+						font,
+						$"{tile.iQuad.X} - {tile.iQuad.Y} - {tile.iQuad.Rotation} - {tile.iQuad.Flip}",
+						new(size * drawSize, 5), Color.Pink,
+						0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f
+					);
+					_spriteBatch.DrawString(
+						font,
+						$"{tile.iQuad.Connections[0]}, {tile.iQuad.Connections[1]}, {tile.iQuad.Connections[2]}, {tile.iQuad.Connections[3]}",
+						new(size * drawSize, drawSize), Color.Pink,
+						0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f
+					);
+				}
 			}
 		}
 

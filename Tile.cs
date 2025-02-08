@@ -62,9 +62,7 @@ public class Tile
 
 		List<ImageQuad> nTiles = [];
 		string otherConnection = other.iQuad.Connections[(checkingSide + 2) % 4];
-		char[] charArray = otherConnection.ToCharArray();
-		Array.Reverse(charArray);
-		string reversed = new(charArray);
+		string reversed = Utils.Reverse(otherConnection);
 		foreach (ImageQuad quad in Tiles)
 		{
 			if (reversed == quad.Connections[checkingSide]) nTiles.Add(quad);

@@ -40,6 +40,19 @@ public readonly struct ImageQuad
 			currentConnectionsIndex++;
 		}
 
+		if (flipEffect == SpriteEffects.FlipHorizontally)
+		{
+			string cache = newConnections[1];
+			newConnections[0] = Utils.Reverse(newConnections[0]);
+			newConnections[1] = Utils.Reverse(newConnections[3]);
+			newConnections[2] = Utils.Reverse(newConnections[2]);
+			newConnections[3] = Utils.Reverse(cache);
+		}
+		else if (flipEffect == SpriteEffects.FlipVertically)
+		{
+
+		}
+
 		Connections = newConnections;
 		Quad = new Rectangle(X * imageQuadSize, Y * imageQuadSize, imageQuadSize, imageQuadSize);
 	}
@@ -77,6 +90,10 @@ public static class TileMap
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1));
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 2));
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 3));
+
+		Tiles.Add(new ImageQuad(imagePosition, connections, flipEffect: SpriteEffects.FlipHorizontally));
+		// Tiles.Add(new ImageQuad(imagePosition, connections, flipEffect: SpriteEffects.FlipVertically));
+		// Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1));
 	}
 
 

@@ -4,11 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/File.spritefont</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/SYS2.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/tiles.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/WandD.png</File>
   </SourceFiles>
   <DestFiles>
+    <File>Arial.spritefont</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
