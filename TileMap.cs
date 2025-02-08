@@ -97,9 +97,9 @@ public static class TileMap
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 3));
 
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipHorizontally));
-		Tiles.Add(new ImageQuad(imagePosition, connections, flipEffect: SpriteEffects.FlipVertically));
-
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipHorizontally));
+
+		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipVertically));
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipVertically));
 	}
 

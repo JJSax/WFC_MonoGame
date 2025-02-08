@@ -1,5 +1,8 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/File.spritefont","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.2917202
+"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land1.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/land1.xnb","TextureProcessor","Texture2DContent",1329,65621,0.1601056
+"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land2.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/land2.xnb","TextureProcessor","Texture2DContent",1748,65621,0.0084616
+"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land3.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/land3.xnb","TextureProcessor","Texture2DContent",2113,65621,0.1468931
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/SYS2.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/SYS2.xnb","TextureProcessor","Texture2DContent",9360,4194389,0.3557651
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/tiles.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/tiles.xnb","TextureProcessor","Texture2DContent",5121,360085,0.1618204
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/WandD.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/WandD.xnb","TextureProcessor","Texture2DContent",8260,360085,0.0142248

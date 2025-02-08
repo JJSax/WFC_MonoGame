@@ -15,9 +15,10 @@ namespace Basic;
 public class Tile
 {
 
-	public static Texture2D image;
+	public static Texture2D[] image;
 	static Point center = new(ImageQuad.imageQuadSize / 2, ImageQuad.imageQuadSize / 2);
 
+	private byte Variant { get; }
 	public ImageQuad iQuad;
 	public Point Position { get; private set; }
 	public bool Collapsed { get; private set; } = false;
@@ -37,6 +38,7 @@ public class Tile
 		// iQuad = TileMap.Tiles[TileMap.LocationMap[new Point(x, y)]];
 		Position = tilePosition;
 		availableTiles = new(TileMap.Tiles);
+		Variant = (byte)rand.Next(3);
 	}
 	public Tile(Point tilePosition) : this(0, 3, tilePosition) { }
 
@@ -48,7 +50,7 @@ public class Tile
 			spriteBatch.FillRectangle(dest, Color.Pink);
 			return;
 		}
-		spriteBatch.Draw(image, dest, iQuad.Quad, Color.White, iQuad.Rotation, center.ToVector2(), iQuad.Flip, 0f);
+		spriteBatch.Draw(image[Variant], dest, iQuad.Quad, Color.White, iQuad.Rotation, center.ToVector2(), iQuad.Flip, 0f);
 	}
 
 	private List<ImageQuad> SideReduction(Tile[,] tiles, List<ImageQuad> Tiles, int ox, int oy, int checkingSide)

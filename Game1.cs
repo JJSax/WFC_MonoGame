@@ -73,7 +73,11 @@ public class Game1 : Game
 	{
 		_spriteBatch = new SpriteBatch(GraphicsDevice);
 
-		Tile.image = Content.Load<Texture2D>("Sys2");
+		Tile.image = [
+			Content.Load<Texture2D>("land1"),
+			Content.Load<Texture2D>("land2"),
+			Content.Load<Texture2D>("land3"),
+		];
 		font = Content.Load<SpriteFont>("Arial");
 		// TODO: use this.Content to load your game content here
 	}
