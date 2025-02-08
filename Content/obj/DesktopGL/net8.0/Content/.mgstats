@@ -1,3 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/SYS2.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/Content/SYS2.xnb","TextureProcessor","Texture2DContent",9360,4194389,0.2981098
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/tiles.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/Content/tiles.xnb","TextureProcessor","Texture2DContent",5121,360085,0.1673358
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/WandD.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/Content/WandD.xnb","TextureProcessor","Texture2DContent",8260,360085,0.1455181

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,6 +16,7 @@ public class Tile
 {
 
 	public static Texture2D image;
+	static Point center = new(ImageQuad.imageQuadSize / 2, ImageQuad.imageQuadSize / 2);
 
 	public ImageQuad iQuad;
 	public Point Position { get; private set; }
@@ -40,13 +42,13 @@ public class Tile
 
 	public void Draw(SpriteBatch spriteBatch, int x, int y)
 	{
-		Rectangle dest = new(x, y, Game1.drawSize, Game1.drawSize);
+		Rectangle dest = new(x + center.X, y + center.Y, Game1.drawSize, Game1.drawSize);
 		if (ERRORED)
 		{
 			spriteBatch.FillRectangle(dest, Color.Pink);
 			return;
 		}
-		spriteBatch.Draw(image, dest, iQuad.Quad, Color.White, iQuad.Rotation, new Vector2(8, 8), iQuad.Flip, 0f);
+		spriteBatch.Draw(image, dest, iQuad.Quad, Color.White, iQuad.Rotation, center.ToVector2(), iQuad.Flip, 0f);
 	}
 
 	private List<ImageQuad> SideReduction(Tile[,] tiles, List<ImageQuad> Tiles, int ox, int oy, int checkingSide)

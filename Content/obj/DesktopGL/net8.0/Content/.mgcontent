@@ -4,10 +4,12 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/SYS2.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/tiles.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/WandD.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

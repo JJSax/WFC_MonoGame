@@ -9,7 +9,7 @@ namespace Basic;
 
 public readonly struct ImageQuad
 {
-	private const int imageQuadSize = 15;
+	public const int imageQuadSize = 32;
 	public readonly SpriteEffects Flip { get; }
 	public readonly float Rotation { get; }
 	public int X { get; }
