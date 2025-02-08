@@ -29,12 +29,13 @@ public readonly struct ImageQuad
 		Rotation = rotationBy90 * (float)Math.PI / 2;
 		string[] newConnections = new string[4];
 		int currentConnectionsIndex = 0;
-		for (int i = 4 - rotationBy90; i < 4; i++)
+		int adjRotation = rotationBy90 > 0 && flipEffect != SpriteEffects.None ? rotationBy90 + 2 : rotationBy90;
+		for (int i = 4 - adjRotation; i < 4; i++)
 		{
 			newConnections[currentConnectionsIndex] = originalConnections[i];
 			currentConnectionsIndex++;
 		}
-		for (int i = 0; i < 4 - rotationBy90; i++)
+		for (int i = 0; i < 4 - adjRotation; i++)
 		{
 			newConnections[currentConnectionsIndex] = originalConnections[i];
 			currentConnectionsIndex++;
@@ -95,9 +96,11 @@ public static class TileMap
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 2));
 		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 3));
 
-		Tiles.Add(new ImageQuad(imagePosition, connections, flipEffect: SpriteEffects.FlipHorizontally));
+		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipHorizontally));
 		Tiles.Add(new ImageQuad(imagePosition, connections, flipEffect: SpriteEffects.FlipVertically));
-		// Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1));
+
+		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipHorizontally));
+		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipVertically));
 	}
 
 
