@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.Graphics;
 
 namespace Basic;
 
@@ -16,11 +15,14 @@ public readonly struct ImageQuad
 	public int Y { get; }
 	public string[] Connections { get; }
 	public Rectangle Quad { get; }
+	public Texture2D[] Images { get; }
 
-	public ImageQuad(Point imgPosition, string[] originalConnections, SpriteEffects flipEffect = SpriteEffects.None, sbyte rotationBy90 = 0)
+	public ImageQuad(Point imgPosition, Texture2D[] images, string[] originalConnections, SpriteEffects flipEffect = SpriteEffects.None, sbyte rotationBy90 = 0)
 	{
 		X = imgPosition.X;
 		Y = imgPosition.Y;
+
+		Images = images;
 
 		Flip = flipEffect;
 
@@ -77,30 +79,21 @@ public static class TileMap
 	/// <summary>
 	///
 	/// </summary>
-	/// <param name="tx"></param>
-	/// <param name="ty"></param>
-	/// <param name="connections">Top - Right - Bottom - Left</param>
-	/// <returns></returns>
-	public static void New(Point imagePosition, string[] connections)
+	/// <param name="imagePosition"></param>
+	/// <param name="textures"></param>
+	/// <param name="connections">Top - Right - Bottom - Left Clockwise</param>
+	public static void New(Point imagePosition, Texture2D[] textures, string[] connections)
 	{
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 0));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 1));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 2));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 3));
 
-		// if (LocationMap.ContainsKey(imagePosition))
-		// {
-		// 	Debug.WriteLine("POSITION ALREADY MAPPED: " + imagePosition);
-		// 	throw new InvalidOperationException("Position already mapped.");
-		// }
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipHorizontally));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipHorizontally));
 
-		// LocationMap.Add(imagePosition, Tiles.Count);
-		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 0));
-		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1));
-		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 2));
-		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 3));
-
-		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipHorizontally));
-		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipHorizontally));
-
-		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipVertically));
-		Tiles.Add(new ImageQuad(imagePosition, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipVertically));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipVertically));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipVertically));
 	}
 
 

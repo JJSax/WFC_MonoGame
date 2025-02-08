@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection.Metadata;
-using System.Reflection.PortableExecutable;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -14,33 +12,27 @@ namespace Basic;
 /// </summary>
 public class Tile
 {
-
-	public static Texture2D[] image;
-	static Point center = new(ImageQuad.imageQuadSize / 2, ImageQuad.imageQuadSize / 2);
+	private bool ERRORED = false;
+	// public static Texture2D[] Images = [];
+	private static Point center = new(ImageQuad.imageQuadSize / 2, ImageQuad.imageQuadSize / 2);
 
 	private byte Variant { get; }
-	public ImageQuad iQuad;
-	public Point Position { get; private set; }
-	public bool Collapsed { get; private set; } = false;
-	private bool ERRORED = false;
+	private Point Position { get; set; }
 	public List<ImageQuad> availableTiles;
+	public ImageQuad iQuad;
+	public bool Collapsed { get; private set; } = false;
 
 	private static Random rand = new();
 
-	/// <summary>
-	///
-	/// </summary>
 	/// <param name="x">The location in the image</param>
 	/// <param name="y">The location in the image</param>
 	/// <param name="tilePosition">Where the tile is</param>
-	public Tile(int x, int y, Point tilePosition)
+	public Tile(Point tilePosition)
 	{
-		// iQuad = TileMap.Tiles[TileMap.LocationMap[new Point(x, y)]];
 		Position = tilePosition;
 		availableTiles = new(TileMap.Tiles);
 		Variant = (byte)rand.Next(3);
 	}
-	public Tile(Point tilePosition) : this(0, 3, tilePosition) { }
 
 	public void Draw(SpriteBatch spriteBatch, int x, int y)
 	{
@@ -50,7 +42,7 @@ public class Tile
 			spriteBatch.FillRectangle(dest, Color.Pink);
 			return;
 		}
-		spriteBatch.Draw(image[Variant], dest, iQuad.Quad, Color.White, iQuad.Rotation, center.ToVector2(), iQuad.Flip, 0f);
+		spriteBatch.Draw(iQuad.Images[Variant], dest, iQuad.Quad, Color.White, iQuad.Rotation, center.ToVector2(), iQuad.Flip, 0f);
 	}
 
 	private List<ImageQuad> SideReduction(Tile[,] tiles, List<ImageQuad> Tiles, int ox, int oy, int checkingSide)
@@ -107,7 +99,6 @@ public class Tile
 		// Debug.Write(Position);
 		if (availableTiles.Count == 0)
 		{
-
 			Debug.Write(Position);
 			ERRORED = true;
 			Debug.Write("MISSING: ");

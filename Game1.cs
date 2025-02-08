@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Basic.TileTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -35,35 +36,6 @@ public class Game1 : Game
 		// TODO: Add your initialization logic here
 
 
-		//! About at the point of remapping all of these to the sys2.png
-		//! I noticed some of the tiles didn't line up now with rotation.
-
-		TileMap.New(new Point(0, 0), ["DD", "DD", "DD", "DD"]);
-		TileMap.New(new Point(1, 0), ["WD", "DD", "DD", "DD"]);
-		TileMap.New(new Point(2, 0), ["WW", "DD", "DD", "DD"]);
-		TileMap.New(new Point(3, 0), ["WW", "WD", "DD", "DD"]);
-		TileMap.New(new Point(4, 0), ["WW", "DW", "DD", "DD"]);
-		TileMap.New(new Point(5, 0), ["WW", "DD", "WD", "DD"]);
-		TileMap.New(new Point(6, 0), ["WW", "WW", "DD", "DD"]);
-		TileMap.New(new Point(7, 0), ["WW", "DD", "WW", "DD"]);
-
-		TileMap.New(new Point(0, 1), ["WW", "WW", "WW", "WW"]);
-		TileMap.New(new Point(1, 1), ["DW", "WW", "WW", "WW"]);
-		TileMap.New(new Point(2, 1), ["DD", "WW", "WW", "WW"]);
-		TileMap.New(new Point(3, 1), ["DD", "DW", "WW", "WW"]);
-		TileMap.New(new Point(4, 1), ["DD", "WD", "WW", "WW"]);
-		TileMap.New(new Point(5, 1), ["DD", "WW", "DW", "WW"]);
-		TileMap.New(new Point(6, 1), ["DD", "DD", "WW", "WW"]);
-		TileMap.New(new Point(7, 1), ["DD", "WW", "DD", "WW"]);
-
-		for (int x = 0; x < size; x++)
-		{
-			for (int y = 0; y < size; y++)
-			{
-				tiles[x, y] = new(new Point(x, y));
-			}
-		}
-
 		rand = new();
 
 		base.Initialize();
@@ -73,11 +45,21 @@ public class Game1 : Game
 	{
 		_spriteBatch = new SpriteBatch(GraphicsDevice);
 
-		Tile.image = [
+		Tile1.SetImages([
 			Content.Load<Texture2D>("land1"),
 			Content.Load<Texture2D>("land2"),
 			Content.Load<Texture2D>("land3"),
-		];
+		]);
+
+		Tile1.Initialize();
+		for (int x = 0; x < size; x++)
+		{
+			for (int y = 0; y < size; y++)
+			{
+				tiles[x, y] = new(new Point(x, y));
+			}
+		}
+
 		font = Content.Load<SpriteFont>("Arial");
 		// TODO: use this.Content to load your game content here
 	}
