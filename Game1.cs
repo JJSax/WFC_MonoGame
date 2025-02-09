@@ -51,7 +51,12 @@ public class Game1 : Game
 			Content.Load<Texture2D>("land3"),
 		]);
 
+		Tile2.SetImages([
+			Content.Load<Texture2D>("mDirt1")
+		]);
+
 		Tile1.Initialize();
+		Tile2.Initialize();
 		for (int x = 0; x < size; x++)
 		{
 			for (int y = 0; y < size; y++)

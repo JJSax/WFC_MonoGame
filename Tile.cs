@@ -16,7 +16,7 @@ public class Tile
 	// public static Texture2D[] Images = [];
 	private static Point center = new(ImageQuad.imageQuadSize / 2, ImageQuad.imageQuadSize / 2);
 
-	private byte Variant { get; }
+	private byte Variant { get; set; }
 	private Point Position { get; set; }
 	public List<ImageQuad> availableTiles;
 	public ImageQuad iQuad;
@@ -31,7 +31,6 @@ public class Tile
 	{
 		Position = tilePosition;
 		availableTiles = new(TileMap.Tiles);
-		Variant = (byte)rand.Next(3);
 	}
 
 	public void Draw(SpriteBatch spriteBatch, int x, int y)
@@ -114,6 +113,10 @@ public class Tile
 		if (Position.X > 0) tiles[Position.X - 1, Position.Y].Reduce(tiles);
 	}
 
-	public void SetTile(ImageQuad to) => iQuad = to;
+	public void SetTile(ImageQuad to)
+	{
+		iQuad = to;
+		Variant = (byte)rand.Next(iQuad.Images.Length);
+	}
 
 }

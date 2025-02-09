@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land2.png</SourceFile>
-  <SourceTime>2025-02-07T22:07:15.7240022-07:00</SourceTime>
+  <SourceTime>2025-02-07T23:38:55.8041601-07:00</SourceTime>
   <DestFile>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/land2.xnb</DestFile>
-  <DestTime>2025-02-07T22:07:43.8757579-07:00</DestTime>
+  <DestTime>2025-02-08T16:57:48.5722387-07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T11:05:56-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
