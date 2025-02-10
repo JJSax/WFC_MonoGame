@@ -4,17 +4,21 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/DGwithWater.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/File.spritefont</File>
+    <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/Grass1.png</File>
+    <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/GrassWater1.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land1.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land2.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land3.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/mDirt1.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/SYS2.png</File>
     <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/tiles.png</File>
-    <File>g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/WandD.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File>Arial.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

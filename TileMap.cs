@@ -96,5 +96,4 @@ public static class TileMap
 		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipVertically));
 	}
 
-
 }

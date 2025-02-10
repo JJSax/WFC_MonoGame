@@ -6,11 +6,6 @@ namespace Basic.TileTypes;
 
 public class Tile2
 {
-
-	public static string[] ImageNames => [
-		"mDirt1"
-	];
-
 	private static Texture2D[] Images = [];
 	public static void SetImages(Texture2D[] textures) => Images = textures;
 

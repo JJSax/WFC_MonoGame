@@ -55,8 +55,23 @@ public class Game1 : Game
 			Content.Load<Texture2D>("mDirt1")
 		]);
 
+		Tile3.SetImages([
+			Content.Load<Texture2D>("Grass1")
+		]);
+
+		Tile4.SetImages([
+			Content.Load<Texture2D>("GrassWater1")
+		]);
+
+		Tile5.SetImages([
+			Content.Load<Texture2D>("DGwithWater")
+		]);
+
 		Tile1.Initialize();
 		Tile2.Initialize();
+		Tile3.Initialize();
+		Tile4.Initialize();
+		Tile5.Initialize();
 		for (int x = 0; x < size; x++)
 		{
 			for (int y = 0; y < size; y++)
