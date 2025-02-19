@@ -1,6 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/DGwithWater.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/DGwithWater.xnb","TextureProcessor","Texture2DContent",11493,327765,0.1657797
+"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/DGwithWater.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/DGwithWater.xnb","TextureProcessor","Texture2DContent",15615,524373,0.1587122
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/File.spritefont","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.2917202
+"g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/full.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/full.xnb","TextureProcessor","Texture2DContent",45675,3686485,0.2995181
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/GrassWater1.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/GrassWater1.xnb","TextureProcessor","Texture2DContent",6200,131157,0.0109313
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land1.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/land1.xnb","TextureProcessor","Texture2DContent",6212,131157,0.1566888
 "g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/land2.png","g:/Programs/C#/MonoGame/Small_Projects/WFC/Basic/Content/bin/DesktopGL/land2.xnb","TextureProcessor","Texture2DContent",6578,131157,0.027264

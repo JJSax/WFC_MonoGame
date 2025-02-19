@@ -32,6 +32,13 @@ public class Tile5
 		TileMap.New(new Point(17, 0), Images, ["WW", "DW", "DG", "WW"]);
 		TileMap.New(new Point(18, 0), Images, ["GD", "DD", "DD", "DG"]);
 		TileMap.New(new Point(19, 0), Images, ["WW", "WG", "DG", "WW"]);
+		TileMap.New(new Point(20, 0), Images, ["WD", "DD", "DG", "GG"]);
+		TileMap.New(new Point(21, 0), Images, ["WW", "GD", "GD", "DD"]);
+		TileMap.New(new Point(22, 0), Images, ["WW", "GG", "WG", "DG"]);
+		TileMap.New(new Point(23, 0), Images, ["DD", "DD", "DW", "DG"]);
+		TileMap.New(new Point(24, 0), Images, ["DW", "WW", "DG", "GG"]);
+		TileMap.New(new Point(25, 0), Images, ["DD", "DW", "WW", "DG"]);
+		TileMap.New(new Point(26, 0), Images, ["GG", "WD", "DG", "WW"]);
 
 		TileMap.New(new Point(0, 1), Images, ["DG", "GW", "WW", "WW"]);
 		TileMap.New(new Point(1, 1), Images, ["GG", "GG", "WW", "DW"]);
@@ -53,6 +60,13 @@ public class Tile5
 		TileMap.New(new Point(17, 1), Images, ["WW", "GW", "GD", "WW"]);
 		TileMap.New(new Point(18, 1), Images, ["DG", "GG", "GG", "GD"]);
 		TileMap.New(new Point(19, 1), Images, ["WW", "WD", "GD", "WW"]);
+		TileMap.New(new Point(20, 1), Images, ["WG", "GG", "GD", "DD"]);
+		TileMap.New(new Point(21, 1), Images, ["WW", "DG", "DG", "GG"]);
+		TileMap.New(new Point(22, 1), Images, ["WW", "DD", "WD", "GD"]);
+		TileMap.New(new Point(23, 1), Images, ["DD", "GD", "DW", "DG"]);
+		TileMap.New(new Point(24, 1), Images, ["GW", "WW", "GD", "DD"]);
+		TileMap.New(new Point(25, 1), Images, ["GG", "GW", "WW", "GD"]);
+		TileMap.New(new Point(26, 1), Images, ["GG", "WD", "DG", "GD"]);
 
 		TileMap.New(new Point(0, 2), Images, ["WG", "WW", "WW", "GD"]);
 		TileMap.New(new Point(1, 2), Images, ["WW", "WG", "DD", "DD"]);
@@ -67,6 +81,20 @@ public class Tile5
 		TileMap.New(new Point(10, 2), Images, ["GD", "WW", "GG", "GG"]);
 		TileMap.New(new Point(11, 2), Images, ["DD", "WG", "DW", "DD"]);
 		TileMap.New(new Point(12, 2), Images, ["WW", "DD", "DD", "GG"]);
+		TileMap.New(new Point(13, 2), Images, ["GD", "WW", "WD", "DG"]);
+		TileMap.New(new Point(14, 2), Images, ["DD", "GW", "GG", "GG"]);
+		TileMap.New(new Point(15, 2), Images, ["GG", "GG", "DG", "WW"]);
+		TileMap.New(new Point(16, 2), Images, ["GG", "GG", "WD", "WG"]);
+		TileMap.New(new Point(17, 2), Images, ["DG", "WG", "GG", "GD"]);
+		TileMap.New(new Point(18, 2), Images, ["WW", "GD", "DD", "WD"]);
+		TileMap.New(new Point(19, 2), Images, ["DD", "DD", "DW", "GG"]);
+		TileMap.New(new Point(20, 2), Images, ["DG", "GG", "GW", "WW"]);
+		TileMap.New(new Point(21, 2), Images, ["WW", "DG", "DG", "WW"]);
+		TileMap.New(new Point(22, 2), Images, ["DW", "DD", "WD", "GD"]);
+		TileMap.New(new Point(23, 2), Images, ["GG", "GG", "GW", "GD"]);
+		TileMap.New(new Point(24, 2), Images, ["GW", "DD", "DG", "GG"]);
+		TileMap.New(new Point(25, 2), Images, ["DD", "DW", "GD", "DG"]);
+		TileMap.New(new Point(26, 2), Images, ["GG", "WD", "DG", "GD"]);
 
 		TileMap.New(new Point(0, 3), Images, ["WD", "WW", "WW", "DG"]);
 		TileMap.New(new Point(1, 3), Images, ["WW", "WD", "GG", "GG"]);
@@ -81,6 +109,19 @@ public class Tile5
 		TileMap.New(new Point(10, 3), Images, ["DG", "WW", "DD", "DD"]);
 		TileMap.New(new Point(11, 3), Images, ["GG", "WD", "GW", "GG"]);
 		TileMap.New(new Point(12, 3), Images, ["WW", "GG", "GG", "DD"]);
+		TileMap.New(new Point(13, 3), Images, ["DG", "WW", "WG", "GD"]);
+		TileMap.New(new Point(14, 3), Images, ["GG", "DW", "DD", "DD"]);
+		TileMap.New(new Point(15, 3), Images, ["DD", "DD", "GD", "WW"]);
+		TileMap.New(new Point(16, 3), Images, ["DD", "DD", "WG", "WD"]);
+		TileMap.New(new Point(17, 3), Images, ["DG", "WG", "GG", "GD"]);
+		TileMap.New(new Point(18, 3), Images, ["WW", "DG", "GG", "WG"]);
+		TileMap.New(new Point(19, 3), Images, ["GG", "GG", "GW", "DD"]);
+		//GAP
+		TileMap.New(new Point(22, 3), Images, ["GW", "DD", "WD", "GD"]);
+		TileMap.New(new Point(23, 3), Images, ["GG", "DG", "GW", "GD"]);
+		TileMap.New(new Point(24, 3), Images, ["GW", "GG", "GD", "DD"]);
+		TileMap.New(new Point(25, 3), Images, ["GG", "GW", "GD", "GD"]);
+		TileMap.New(new Point(26, 3), Images, ["DD", "WG", "GD", "GD"]);
 
 	}
 

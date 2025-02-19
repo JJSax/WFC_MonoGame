@@ -12,7 +12,7 @@ namespace Basic;
 /// </summary>
 public class Tile
 {
-	private bool ERRORED = false;
+	public bool ERRORED = false;
 	// public static Texture2D[] Images = [];
 	private static Point center = new(ImageQuad.imageQuadSize / 2, ImageQuad.imageQuadSize / 2);
 

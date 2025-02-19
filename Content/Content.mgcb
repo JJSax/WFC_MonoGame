@@ -32,6 +32,18 @@
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont;Arial.spritefont
 
+#begin full.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:full.png
+
 #begin Grass1.png
 /importer:TextureImporter
 /processor:TextureProcessor
