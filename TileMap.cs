@@ -13,11 +13,12 @@ public readonly struct ImageQuad
 	public readonly float Rotation { get; }
 	public int X { get; }
 	public int Y { get; }
+	public int Weight { get; }
 	public string[] Connections { get; }
 	public Rectangle Quad { get; }
 	public Texture2D[] Images { get; }
 
-	public ImageQuad(Point imgPosition, Texture2D[] images, string[] originalConnections, SpriteEffects flipEffect = SpriteEffects.None, sbyte rotationBy90 = 0)
+	public ImageQuad(Point imgPosition, Texture2D[] images, string[] originalConnections, int weight, SpriteEffects flipEffect = SpriteEffects.None, sbyte rotationBy90 = 0)
 	{
 		X = imgPosition.X;
 		Y = imgPosition.Y;
@@ -25,6 +26,8 @@ public readonly struct ImageQuad
 		Images = images;
 
 		Flip = flipEffect;
+
+		Weight = weight;
 
 		if (rotationBy90 > 3) throw new ArgumentException("Attempt to rotate beyond limits");
 
@@ -73,8 +76,15 @@ public readonly struct ImageQuad
 /// <param name="connections"></param>
 public static class TileMap
 {
+	public static int MaxScore { get; private set; } = 0;
 	public static List<ImageQuad> Tiles { get; private set; } = [];
-	// public static Dictionary<Point, int> LocationMap { get; private set; } = [];
+
+	public static Dictionary<string, int> ScoreMap { get; set; } = new()
+	{
+		{ "W", 1 },
+		{ "D", 2 },
+		{ "G", 4 }
+	};
 
 	/// <summary>
 	///
@@ -84,16 +94,27 @@ public static class TileMap
 	/// <param name="connections">Top - Right - Bottom - Left Clockwise</param>
 	public static void New(Point imagePosition, Texture2D[] textures, string[] connections)
 	{
-		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 0));
-		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 1));
-		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 2));
-		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 3));
+		int score = 0;
+		foreach (string cn in connections)
+		{
+			foreach (char ch in cn)
+			{
+				int lScore = ScoreMap[ch.ToString()] * 8;
+				score += lScore;
+				MaxScore += lScore;
+			}
+		}
 
-		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipHorizontally));
-		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipHorizontally));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, score, rotationBy90: 0));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, score, rotationBy90: 1));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, score, rotationBy90: 2));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, score, rotationBy90: 3));
 
-		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 0, flipEffect: SpriteEffects.FlipVertically));
-		Tiles.Add(new ImageQuad(imagePosition, textures, connections, rotationBy90: 1, flipEffect: SpriteEffects.FlipVertically));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, score, rotationBy90: 0, flipEffect: SpriteEffects.FlipHorizontally));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, score, rotationBy90: 1, flipEffect: SpriteEffects.FlipHorizontally));
+
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, score, rotationBy90: 0, flipEffect: SpriteEffects.FlipVertically));
+		Tiles.Add(new ImageQuad(imagePosition, textures, connections, score, rotationBy90: 1, flipEffect: SpriteEffects.FlipVertically));
 	}
 
 }

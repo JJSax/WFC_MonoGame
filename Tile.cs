@@ -18,7 +18,11 @@ public class Tile
 
 	private byte Variant { get; set; }
 	private Point Position { get; set; }
+
+	//todo consider using a single master list and just store integers of index to the list. Perhaps ImageQuad should be a class (reference type)
 	public List<ImageQuad> availableTiles;
+	private int MaxScore { get; set; }
+
 	public ImageQuad iQuad;
 	public bool Collapsed { get; private set; } = false;
 
@@ -31,6 +35,7 @@ public class Tile
 	{
 		Position = tilePosition;
 		availableTiles = new(TileMap.Tiles);
+		MaxScore = TileMap.MaxScore;
 	}
 
 	public void Draw(SpriteBatch spriteBatch, int x, int y)
@@ -56,9 +61,14 @@ public class Tile
 		List<ImageQuad> nTiles = [];
 		string otherConnection = other.iQuad.Connections[(checkingSide + 2) % 4];
 		string reversed = Utils.Reverse(otherConnection);
+		MaxScore = 0;
 		foreach (ImageQuad quad in Tiles)
 		{
-			if (reversed == quad.Connections[checkingSide]) nTiles.Add(quad);
+			if (reversed == quad.Connections[checkingSide])
+			{
+				nTiles.Add(quad);
+				MaxScore += quad.Weight; // Will be reset and only the final one will remain
+			}
 		}
 		return nTiles;
 	}
@@ -95,7 +105,6 @@ public class Tile
 	public void Collapse(Tile[,] tiles)
 	{
 		Collapsed = true;
-		// Debug.Write(Position);
 		if (availableTiles.Count == 0)
 		{
 			Debug.Write(Position);
@@ -104,8 +113,29 @@ public class Tile
 			LogTileConnections(tiles, Position, Game1.size);
 			return; //! When there is no valid texture
 		}
-		ImageQuad choice = availableTiles[rand.Next(availableTiles.Count)];
-		SetTile(choice);
+
+		int selection = rand.Next(MaxScore);
+		bool choiceFound = false;
+		ImageQuad choice = default;
+		foreach (ImageQuad iq in availableTiles)
+		{
+			selection -= iq.Weight;
+			if (selection <= 0)
+			{
+				choice = iq;
+				choiceFound = true;
+				break;
+			}
+		}
+
+		if (choiceFound)
+		{
+			SetTile(choice);
+		}
+		else
+		{
+			throw new InvalidOperationException("No suitable ImageQuad found");
+		}
 
 		if (Position.Y > 0) tiles[Position.X, Position.Y - 1].Reduce(tiles);
 		if (Position.X < Game1.size - 1) tiles[Position.X + 1, Position.Y].Reduce(tiles);
