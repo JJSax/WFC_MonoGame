@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -68,12 +67,6 @@ public readonly struct ImageQuad
 	}
 }
 
-/// <summary>
-///
-/// </summary>
-/// <param name="x"></param>
-/// <param name="y"></param>
-/// <param name="connections"></param>
 public static class TileMap
 {
 	public static int MaxScore { get; private set; } = 0;

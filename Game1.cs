@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Basic.TileTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -37,8 +36,6 @@ public class Game1 : Game
 	protected override void Initialize()
 	{
 		// TODO: Add your initialization logic here
-
-
 		rand = new();
 
 		base.Initialize();

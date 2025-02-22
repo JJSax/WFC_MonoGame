@@ -13,7 +13,6 @@ namespace Basic;
 public class Tile
 {
 	public bool ERRORED = false;
-	// public static Texture2D[] Images = [];
 	private static Point center = new(ImageQuad.imageQuadSize / 2, ImageQuad.imageQuadSize / 2);
 
 	private byte Variant { get; set; }
@@ -85,7 +84,6 @@ public class Tile
 		availableTiles = SideReduction(tiles, availableTiles, -1, 0, 3);
 	}
 
-
 	void LogTileConnections(Tile[,] tiles, Point Position, int size)
 	{
 		string top = (Position.Y > 0 && tiles[Position.X, Position.Y - 1].Collapsed)
@@ -118,7 +116,7 @@ public class Tile
 		bool choiceFound = false;
 		ImageQuad choice = default;
 		foreach (ImageQuad iq in availableTiles)
-		{
+		{ // This weighted choice doesn't look like it's much better than random.
 			selection -= iq.Weight;
 			if (selection <= 0)
 			{
@@ -129,13 +127,9 @@ public class Tile
 		}
 
 		if (choiceFound)
-		{
 			SetTile(choice);
-		}
 		else
-		{
 			throw new InvalidOperationException("No suitable ImageQuad found");
-		}
 
 		if (Position.Y > 0) tiles[Position.X, Position.Y - 1].Reduce(tiles);
 		if (Position.X < Game1.size - 1) tiles[Position.X + 1, Position.Y].Reduce(tiles);
