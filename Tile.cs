@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -18,8 +20,8 @@ public class Tile
 	private byte Variant { get; set; }
 	private Point Position { get; set; }
 
-	//todo consider using a single master list and just store integers of index to the list. Perhaps ImageQuad should be a class (reference type)
-	public List<ImageQuad> availableTiles;
+	private static ImmutableList<int> AllTileIndices = Enumerable.Range(0, TileMap.Tiles.Count).ToImmutableList();
+	public List<int> availableTiles;
 	private int MaxScore { get; set; }
 
 	public ImageQuad iQuad;
@@ -33,7 +35,8 @@ public class Tile
 	public Tile(Point tilePosition)
 	{
 		Position = tilePosition;
-		availableTiles = new(TileMap.Tiles);
+		availableTiles = AllTileIndices.ToList();
+
 		MaxScore = TileMap.MaxScore;
 	}
 
@@ -48,7 +51,7 @@ public class Tile
 		spriteBatch.Draw(iQuad.Images[Variant], dest, iQuad.Quad, Color.White, iQuad.Rotation, center.ToVector2(), iQuad.Flip, 0f);
 	}
 
-	private List<ImageQuad> SideReduction(Tile[,] tiles, List<ImageQuad> Tiles, int ox, int oy, int checkingSide)
+	private List<int> SideReduction(Tile[,] tiles, List<int> Tiles, int ox, int oy, int checkingSide)
 	{
 		if (Position.X + ox < 0 || Position.X + ox > Game1.size) return Tiles;
 		if (Position.Y + oy < 0 || Position.Y + oy > Game1.size) return Tiles;
@@ -57,15 +60,16 @@ public class Tile
 		Tile other = tiles[Position.X + ox, Position.Y + oy];
 		if (!other.Collapsed) return Tiles;
 
-		List<ImageQuad> nTiles = [];
+		List<int> nTiles = [];
 		string otherConnection = other.iQuad.Connections[(checkingSide + 2) % 4];
 		string reversed = Utils.Reverse(otherConnection);
 		MaxScore = 0;
-		foreach (ImageQuad quad in Tiles)
+		foreach (int index in Tiles)
 		{
+			ImageQuad quad = TileMap.Tiles[index];
 			if (reversed == quad.Connections[checkingSide])
 			{
-				nTiles.Add(quad);
+				nTiles.Add(index);
 				MaxScore += quad.Weight; // Will be reset and only the final one will remain
 			}
 		}
@@ -115,8 +119,9 @@ public class Tile
 		int selection = rand.Next(MaxScore);
 		bool choiceFound = false;
 		ImageQuad choice = default;
-		foreach (ImageQuad iq in availableTiles)
+		foreach (int index in availableTiles)
 		{ // This weighted choice doesn't look like it's much better than random.
+			ImageQuad iq = TileMap.Tiles[index];
 			selection -= iq.Weight;
 			if (selection <= 0)
 			{
